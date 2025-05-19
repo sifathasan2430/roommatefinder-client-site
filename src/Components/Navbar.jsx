@@ -9,8 +9,8 @@ const Navbar = () => {
     </>
 
     const NavButtons=<>
-     <NavLink href="#" className="hidden md:inline-block text-slate-300 hover:text-white transition">Login</NavLink>
-     <NavLink href="#" className="hidden md:inline-block text-slate-300 hover:text-white transition">Signup</NavLink>
+     <NavLink to={"/login"} className="hidden md:inline-block text-slate-300 hover:text-white transition">Login</NavLink>
+     <NavLink to={"/signup"} className="hidden md:inline-block text-slate-300 hover:text-white transition">Signup</NavLink>
     </>
 
     return (

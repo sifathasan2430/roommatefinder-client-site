@@ -1,12 +1,16 @@
 import React from 'react';
 import Navbar from '../Components/Navbar';
-import { Outlet } from 'react-router';
+import { Outlet, useNavigation } from 'react-router';
 
 const Root = () => {
+    const Navigation=useNavigation()
+
     return (
         <div>
                     <Navbar></Navbar>
-                    <Outlet></Outlet>
+          {
+            Navigation.state ==="loading"? "":<Outlet></Outlet>
+          }
         </div>
     );
 };
