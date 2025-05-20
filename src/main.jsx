@@ -8,6 +8,9 @@ import Errorpage from './Components/Errorpage.jsx'
 import SignUp from './Components/SignUp.jsx'
 import Login from './Components/Login.jsx'
 import AuthContextProvider from './Context/AuthContextProvider.jsx'
+import Privateroute from './Components/Privateroute.jsx'
+import MyListings from './Components/MyListings.jsx'
+import AddToFindRoommate from './Components/AddtoFindRoommate.jsx'
 
 const router=createBrowserRouter([{
   path:"/",
@@ -20,7 +23,19 @@ const router=createBrowserRouter([{
   {
     path:"/login",
     Component:Login
-  }
+  },
+  {
+    path:'mylistings',
+    element:<Privateroute>
+      <MyListings></MyListings>
+    </Privateroute>
+  },
+  {
+   path:'addtofindroommate',
+    element:<Privateroute>
+     <AddToFindRoommate></AddToFindRoommate>
+    </Privateroute>
+    }
 ]
 }])
 createRoot(document.getElementById('root')).render(
