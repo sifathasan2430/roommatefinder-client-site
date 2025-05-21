@@ -4,10 +4,10 @@ import UserAuthContext from '../Context/Context';
 const Navbar = () => {
   const {user,userLogOut}=useContext(UserAuthContext)
     const navLinks=<>
-     <NavLink href="#features" className="text-stone-300 hover:text-white hover:underline">Home</NavLink>
-        <NavLink to={'/addtofindroommate'} className="text-stone-300 hover:text-white hover:underline">Add to Find Roommate</NavLink>
-        <NavLink to={'#'} className="text-stone-300 hover:text-white hover:underline">Browse Listing</NavLink>
-        <NavLink to='/mylistings' className="text-stone-300 hover:text-white hover:underline">My Listings</NavLink>
+     <NavLink href="#features" className=" font-semibold text-stone-300 hover:text-white hover:underline">Home</NavLink>
+     {  user && <NavLink to={'/addtofindroommate'} className="text-stone-300 font-semibold  hover:text-white hover:underline">AddtoFindRoommate</NavLink>}
+        <NavLink to={'#'} className="font-semibold  text-stone-300 hover:text-white hover:underline">BrowseListing</NavLink>
+     {user &&   <NavLink to='/mylistings' className="text-stone-300 font-semibold  hover:text-white hover:underline">My Listings</NavLink>}
     </>
 
     const NavButtons=<>
@@ -17,11 +17,11 @@ const Navbar = () => {
 
     return (
         <div>
-              <nav className="fixed top-0 left-0 w-full z-50 py-6 px-4 md:px-12 backdrop-blur-md bg-slate-900/50">
+              <nav className="w-full  py-6 px-4 md:px-12 bg-slate-900/50">
     <div className="flex justify-between items-center max-w-7xl mx-auto">
       <div className="flex items-center space-x-2">
 
-        <div className='dropdown'>
+        <div className='dropdown hidden'>
              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
       </div>
@@ -30,7 +30,7 @@ const Navbar = () => {
         <div className="w-8 h-8   rounded-full gradient-bg flex items-center justify-center">
 
           
-            <span className="text-xl  font-bold title-font">RoomFinder</span>
+            <span className="text-xl  font-bold text-white ">RoomFinder</span>
         </div>
              <div className="sm:hidden absolute left-0 top-18 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
            
