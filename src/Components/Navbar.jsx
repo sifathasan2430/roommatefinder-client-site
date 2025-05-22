@@ -6,8 +6,8 @@ const Navbar = () => {
     const navLinks=<>
      <NavLink href="#features" className=" font-semibold text-stone-300 hover:text-white hover:underline">Home</NavLink>
      {  user && <NavLink to={'/addtofindroommate'} className="text-stone-300 font-semibold  hover:text-white hover:underline">AddtoFindRoommate</NavLink>}
-        <NavLink to={'#'} className="font-semibold  text-stone-300 hover:text-white hover:underline">BrowseListing</NavLink>
-     {user &&   <NavLink to='/mylistings' className="text-stone-300 font-semibold  hover:text-white hover:underline">My Listings</NavLink>}
+        <NavLink to={'/browserlisting'} className="font-semibold  text-stone-300 hover:text-white hover:underline">BrowseListing</NavLink>
+     {user &&   <NavLink to='/mylisting' className="text-stone-300 font-semibold  hover:text-white hover:underline">My Listings</NavLink>}
     </>
 
     const NavButtons=<>
@@ -17,7 +17,7 @@ const Navbar = () => {
 
     return (
         <div>
-              <nav className="w-full  py-6 px-4 md:px-12 bg-slate-900/50">
+              <nav className="w-full  py-6 px-4 md:px-12 bg-[#151617]">
     <div className="flex justify-between items-center max-w-7xl mx-auto">
       <div className="flex items-center space-x-2">
 

@@ -14,6 +14,8 @@ import AddToFindRoommate from './Components/AddtoFindRoommate.jsx'
 import Home from './layout/Home.jsx'
 import DetailsPage from './Components/DetailsPage.jsx'
 import Loader from './Components/Loader.jsx'
+import BrowserListingPage from './Components/BrowserLisTingPage.jsx'
+import UpdatePost from './Components/UpdatePost.jsx'
 
 const router=createBrowserRouter([{
   path:"/",
@@ -22,7 +24,7 @@ const router=createBrowserRouter([{
   children:[{
        index:true,
        Component:Home,
-       loader:()=>fetch('http://localhost:3000/availablemembers'
+       loader:()=>fetch("https://roommatefinder-server-site.vercel.app/availablemembers"
        )
   },
     {
@@ -33,12 +35,7 @@ const router=createBrowserRouter([{
     path:"/login",
     Component:Login
   },
-  {
-    path:'mylistings',
-    element:<Privateroute>
-      <MyListings></MyListings>
-    </Privateroute>
-  },
+ 
   {
    path:'addtofindroommate',
     element:<Privateroute>
@@ -47,12 +44,35 @@ const router=createBrowserRouter([{
     },
     { 
       path:"/details/:id",
-      loader:({params})=>fetch(`http://localhost:3000/viewdetails/${params.id}`),
+      loader:({params})=>fetch(`https://roommatefinder-server-site.vercel.app/viewdetails/${params.id}`),
       
        element:<Suspense fallback={<Loader></Loader>}>
        <Privateroute>
      <DetailsPage></DetailsPage>
     </Privateroute></Suspense>
+    },
+    {
+      path:"/browserlisting",
+      loader:()=>fetch("https://roommatefinder-server-site.vercel.app/allpost"),
+      element:<Suspense fallback={<Loader></Loader>}>
+        <BrowserListingPage></BrowserListingPage>
+      </Suspense>
+    },
+    {
+      path:"/mylisting",
+      element:<Suspense>
+        <Privateroute>
+          <MyListings></MyListings>
+        </Privateroute>
+      </Suspense>
+    },
+    {
+      path:"/update/:id",
+      
+      loader:({params})=>fetch(`https://roommatefinder-server-site.vercel.app/viewdetails/${params.id}`),
+      element:<Suspense>
+      <UpdatePost></UpdatePost>
+      </Suspense>
     }
 
 ]

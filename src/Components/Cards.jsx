@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 
 const Cards = ({items}) => {
+  const navigate=useNavigate()
     console.log(items)
      const { _id,photoUrl,description,location, roomType,title,subtitle, phoneNumber}=items
      const price=phoneNumber;
@@ -40,8 +41,8 @@ const Cards = ({items}) => {
       </div>
     </div>
     <div className='p-6'>
-      <button className='btn w-full' > <NavLink to={`/details/${_id}`}>
-      ViewDetails</NavLink></button>
+      <button onClick={()=>navigate(`/details/${_id}`)} className='btn w-full' > 
+      ViewDetails</button>
     </div>
     </div>
  
