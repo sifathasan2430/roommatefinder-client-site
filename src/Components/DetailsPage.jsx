@@ -3,12 +3,12 @@ import { useLoaderData } from 'react-router';
 
 const DetailsPage = () => {
   const detailPost=useLoaderData()
-  console.log(detailPost)
+
 const word=detailPost.
 lifeStyle.split(" ")
 const Lifestyle=word.filter(Boolean)
 
-// console.log(word)
+
     return (
          <div class="max-w-6xl mx-auto p-4">
     <div class="mb-4">

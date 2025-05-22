@@ -5,13 +5,13 @@ import { useLoaderData } from "react-router";
 const UpdatePost = () => {
   const { user } = useContext(UserAuthContext);
   const post = useLoaderData();
-  console.log(post);
+  
   const updateDataHandler = (e) => {
     e.preventDefault()
     const form=e.target
     const FormInputData=new FormData(form)
     const updateData=Object.fromEntries(FormInputData.entries())
-    console.log(post._id)
+    
     fetch(`https://roommatefinder-server-site.vercel.app/updateData/${post._id}`,{
       method:"PUT",
       headers:{

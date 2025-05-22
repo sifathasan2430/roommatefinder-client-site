@@ -37,7 +37,7 @@ const SignUp = () => {
    updateUserProfile(displayName,photoUrl).then(() => {
       setUser({...user,photoUrl})
 }).catch((error) => {
-  console.log(error.message)
+ 
 });
 
     Swal.fire({

@@ -13,9 +13,9 @@ const unSubScribe = onAuthStateChanged(auth, (user) => {
         
    setUser(user)
    setLoading(false)
-   console.log(user)
+  
   } else {
-    console.log('user logout')
+   
     setUser(null)
   }
 });

@@ -5,7 +5,7 @@ import { useLoaderData } from 'react-router';
 
 const Home = () => {
     const members=useLoaderData()
-    console.log(members)
+   
     return (
         <div>
               <Herobanner></Herobanner>

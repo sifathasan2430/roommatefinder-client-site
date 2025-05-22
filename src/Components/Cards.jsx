@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router';
 
 const Cards = ({items}) => {
   const navigate=useNavigate()
-    console.log(items)
+    
      const { _id,photoUrl,description,location, roomType,title,subtitle, phoneNumber}=items
      const price=phoneNumber;
      
