@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router';
 
 const DetailsPage = () => {
   const detailPost=useLoaderData()
+  const [counter,setCounter]=useState(0)
+  
 
 const word=detailPost.
 lifeStyle.split(" ")
@@ -19,6 +21,9 @@ const Lifestyle=word.filter(Boolean)
       </div>
        <h1 class="text-2xl font-semibold">{detailPost.title}</h1>
       <p class="text-sm text-gray-500 mt-1">{detailPost.location}</p>
+      {
+        counter>0 ? <p className='text-2xl font-semibold' >{counter} people interested in</p>:""
+      }
     </div>
 
    <div className='grid grid-cols-1 md:grid-cols-2'>
@@ -35,7 +40,7 @@ const Lifestyle=word.filter(Boolean)
     <p class="text-gray-600">{detailPost.subtitle}</p>
    </div>
    <div>
-     <button className="btn btn-circle">
+     <button onClick={()=>setCounter(prev=>prev+1)} className="btn btn-circle">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="size-[1.2em]"><path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
 </button>
    </div>
@@ -88,6 +93,12 @@ availablity}</span>
 roomType
 }</span>
 </div>
+ <div className='flex justify-between'><span>Contact:</span><span class="font-semibold">
+{
+  counter>0 ? detailPost.contactNumber : ""
+}
+</span>
+</div>
 <div>
   <h1 className='text-xl font-bold my-2'>About the Room</h1>
 <p>{detailPost.description}</p>
@@ -101,6 +112,7 @@ roomType
     }
     
 </div>
+
    </div>
   </div>
   </div>
