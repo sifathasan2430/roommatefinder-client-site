@@ -11,7 +11,7 @@ const UpdatePost = () => {
     const form=e.target
     const FormInputData=new FormData(form)
     const updateData=Object.fromEntries(FormInputData.entries())
-    
+    updateData.click=0
     fetch(`https://roommatefinder-server-site.vercel.app/updateData/${post._id}`,{
       method:"PUT",
       headers:{

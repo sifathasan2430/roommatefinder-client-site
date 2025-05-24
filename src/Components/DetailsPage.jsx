@@ -1,11 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router';
+import UserAuthContext from '../Context/Context';
 
 const DetailsPage = () => {
   const detailPost=useLoaderData()
-  const [counter,setCounter]=useState(0)
   
+  const {user}=useContext(UserAuthContext)
+  const [counter,setCounter]=useState(0)
+  useEffect(()=>{
+      fetch(`https://roommatefinder-server-site.vercel.app/update/${detailPost._id}`).then(res=>res.json().then(data=>{setCounter(data.click)
+        
+      }
+    ))
+  },[])
+  
+const handler=()=>{
+  if (user.email==detailPost.email){
+    return
+  }
 
+  fetch(`https://roommatefinder-server-site.vercel.app/update/${detailPost._id}`,{method:"POST"}).then(res=>res.json()).then(data=>{
+    if(data){
+      setCounter(prev=>prev+1)
+    }
+  })
+}
 const word=detailPost.
 lifeStyle.split(" ")
 const Lifestyle=word.filter(Boolean)
@@ -40,7 +59,7 @@ const Lifestyle=word.filter(Boolean)
     <p class="text-gray-600">{detailPost.subtitle}</p>
    </div>
    <div>
-     <button onClick={()=>setCounter(prev=>prev+1)} className="btn btn-circle">
+     <button onClick={handler} className="btn btn-circle">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="size-[1.2em]"><path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
 </button>
    </div>
@@ -62,7 +81,7 @@ const Lifestyle=word.filter(Boolean)
     </div>
   </div>
 
-  <div class="space-y-4 text-sm text-gray-700">
+  <div class="space-y-4 text-xl text-[#8389f8]">
     <div class="flex justify-between">
       <span>Rent</span><span class="font-semibold">${detailPost.rent}</span>
     </div>

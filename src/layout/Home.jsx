@@ -3,6 +3,8 @@ import Herobanner from "../Components/Herobanner";
 import Cards from "../Components/Cards";
 import { useLoaderData } from "react-router";
 import { Typewriter } from "react-simple-typewriter";
+import { Slide } from "react-awesome-reveal";
+import Gallery from "../Components/Gallery";
 
 const Home = () => {
   const members = useLoaderData();
@@ -26,14 +28,17 @@ const Home = () => {
         delaySpeed={1000}
       />
     </h1>
+         
           <p className="text-[16px] py-1 text-center text-white sm:text-[18px] my-4 sm:my-8 font-semibold">
             Browse profiles of people looking for roommates in your area. Connect and find your perfect match.
-          </p>
+          </p> 
         </div>
         <div className="sm:my-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {members.slice(0, 6).map((items) => (
+       
+           {members.slice(0, 6).map((items) => (
             <Cards items={items} key={items._id}></Cards>
           ))}
+        
         </div>
         <div>
             <h1 className="text-2xl text-center text-white py-3 sm:text-4xl font-bold">
@@ -41,6 +46,7 @@ const Home = () => {
           </h1> 
           
              <p className="text-[16px] py-1 text-center text-white sm:text-[18px] my-4 sm:my-8 font-semibold">Get a glimpse of the beautiful and comfortable homes available. Imagine yourself living her</p>
+             <Gallery/>
         </div>
       </div>
     </div>

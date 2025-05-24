@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import UserAuthContext from "../Context/Context";
 import Swal from "sweetalert2";
+import { Slide } from "react-awesome-reveal";
 
 const AddToFindRoommate = () => {
   const { user } = useContext(UserAuthContext);
@@ -10,7 +11,7 @@ const AddToFindRoommate = () => {
     const form = e.target;
     const formDataColl = new FormData(form);
     const inputData = Object.fromEntries(formDataColl.entries());
-
+       inputData.click=0
     fetch("https://roommatefinder-server-site.vercel.app/addmember", {
       method: "POST",
       headers: {
@@ -41,9 +42,10 @@ const AddToFindRoommate = () => {
           roommates. Your next home is just a click away!
         </p>
       </div>
- <div class="max-w-7xl mx-auto p-6 bg-[#57317c] shadow-xl rounded-2xl ">
+ <div class="max-w-7xl mx-auto p-6  bg-[#57317c] shadow-xl rounded-2xl ">
 
-      <form onSubmit={inputDataHandler} class="space-y-8 ">
+     <Slide direction="left" duration={300}>
+ <form onSubmit={inputDataHandler} class="space-y-8 ">
         <div>
           <label class="block text-2xl sm:text-3xl my-4 font-bold text-[#d8b4fe]">Title:</label>
           <input
@@ -185,10 +187,11 @@ const AddToFindRoommate = () => {
             class="w-full mt-1 py-2 px-4 font-semibold text-white text-2xl  bg-[#453b69] border-none rounded-lg focus:outline-none focus:ring  focus:ring-white"
           />
         </div>
-        <div class="pt-4">
-         <button class="bg-gradient-to-r from-[#0f172a]  to-[#0f172a] text-white px-4 py-2 text-xl rounded font-medium focus:ring ring-black ring-opacity-10 gradient element-to-rotate">Add Post</button>
+        <div class="pt-4 text-center my-4">
+         <button class="btn text-white text-xl bg-gradient-to-r from-[#8884f8] to-[#E449A3]  rounded-xl ">Add Post</button>
         </div>
       </form>
+     </Slide>
     </div>
    </div>
   );
