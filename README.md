@@ -47,45 +47,7 @@ A full-stack web application where users can find, post, and manage roommate lis
 - dotenv
 - CORS
 
----
 
-## 📦 Dependencies
-
-### ➤ Frontend
-```bash
-react
-react-dom
-react-router-dom
-axios
-framer-motion
-tailwindcss
-daisyui ```
-```bash
-express
-cors
-dotenv
-firebase-admin
-mongodb ```
-
-
-# Clone the client repo
-git clone https://github.com/sifathasan2430/roommatefinder-client-site.git
-cd roommatefinder-client-site
-
-# Install dependencies
-npm install
-
-# Start the client
-npm run dev
-# Clone the client repo
-git clone https://github.com/sifathasan2430/roommatefinder-client-site.git
-cd roommatefinder-client-site
-
-# Install dependencies
-npm install
-
-# Start the client
-npm run dev
 
 
 
@@ -117,10 +79,64 @@ Smooth animations with Framer Motion
 
 Reusable components with DaisyUI & Tailwind
 
-Custom 404 page and dark/light toggle
 
-🧑‍💻 Author
-Sifat Hasan
-Frontend-focused MERN Developer | Passionate about building clean, responsive UIs and secure full-stack applications.
+## 📦 Dependencies
 
-🔗 GitHub
+Install my-project with npm
+
+```bash
+  react
+  react-dom
+  react-router-dom
+  axios
+  framer-motion
+  tailwindcss
+  daisyui
+```
+# Backend Dependencies
+```bash 
+express
+cors
+dotenv
+firebase-admin
+mongodb
+```
+
+## 🚀 How to Run Locally
+
+### 🔧 Client
+
+```bash
+# Clone the repository
+git clonegit  https://github.com/sifathasan2430/roommatefinder-client-site.git
+ cd roommatefinder-client-site
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+🔧 Server
+bash
+Copy
+Edit
+# Clone the repository
+git clone https://github.com/sifathasan2430/tour-booking-project
+cd server-repo
+
+# Install dependencies
+npm install
+
+# Add environment variables in a `.env` file
+
+# Start the server
+npm run dev
+
+🌐 Live Client: https://event-management-9774d.web.app/
+
+🚀 Live Server: https://vercel.com/sifathasan2430s-projects/roommatefinder-server-site
+
+🙋‍♂️ About Me
+I'm Sifat Hasan, a frontend-focused MERN Stack Developer passionate about building user-friendly web apps with React and Firebase.
+
+Feel free to connect on GitHub!
