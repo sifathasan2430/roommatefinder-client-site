@@ -2,7 +2,7 @@
 
 A full-stack web application where users can find, post, and manage roommate listings. Built with **React**, **Express**, **MongoDB**, and **Firebase Authentication**, the platform supports user authentication, protected routes, CRUD functionality, and interactive UI components.
 
-🌐 **Live Client:** [roommatefinder-client-site](https://event-management-9774d.web.app)  
+🌐 **Live Client:** [roommatefinder-client-site](https://roomatefinder-5e9a6.web.app)  
 🚀 **Live Server (Vercel):** [roommatefinder-server-site](https://roommatefinder-server-site.vercel.app)  
 📦 **Client Repo:** [GitHub Client](https://github.com/sifathasan2430/roommatefinder-client-site)
 
