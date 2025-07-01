@@ -1,12 +1,75 @@
-# React + Vite
+# 🏠 Roommate Finder - Room Booking Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=flat&logo=web)](https://roomatefinder-5e9a6.web.app/)
 
-Currently, two official plugins are available:
+A full-stack room booking platform where users can search and book apartments, and admins can manage listings via a secure admin panel.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📸 Preview
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<details>
+  <summary>Click to view screenshots</summary>
+
+  <img src="your-big-image-path.png" alt="App Screenshot" style="max-width: 100%; height: auto; overflow: auto;" />
+</details>
+
+---
+
+## 🚀 Live Website
+
+🔗 **[roomatefinder-5e9a6.web.app](https://roomatefinder-5e9a6.web.app/)**
+
+---
+
+## 🎯 Features
+
+### 👤 User Features:
+- 🔍 **Filter & Search** apartments by category, location, price, and amenities
+- 🏠 **View apartment details** with images, features, and availability
+- 🗓️ **Book available apartments** with preferred move-in and move-out dates
+- 📑 **Track bookings and statuses** (e.g., pending, approved)
+- 🔐 **Secure authentication** with Firebase
+
+### 🛠️ Admin Features:
+- 🧩 **Admin Panel** for managing room listings
+- ➕ **Upload apartments** with descriptions and amenities
+- ✏️ **Update / Delete apartment listings**
+- 🔐 **Role-based access control** for admins vs users
+
+---
+
+## 🧰 Tech Stack
+
+| Tech              | Use                             |
+|------------------|----------------------------------|
+| React.js         | Frontend framework               |
+| React Router DOM | Routing                          |
+| Firebase Auth     | Authentication                  |
+| Lucide React     | Icons                            |
+| Tailwind CSS     | Styling                          |
+| Node.js + Express (optional) | Backend (API routes if used) |
+| MongoDB (optional) | Database (if backend is used)   |
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env` file in your project root and include:
+
+```env
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+# Clone the repository
+git clone https://github.com/your-username/roommatefinder.git
+cd roomfinder
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
