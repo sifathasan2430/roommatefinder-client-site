@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Outlet, useNavigation } from 'react-router-dom';
 import Loader from '../Components/Loader';
-import Footer from '../Components/Footer';
+import Footer from '../Components/Footer/Footer';
 
 import Navbar from '../Components/Navbar/Navbar';
 

@@ -22,7 +22,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "All Rooms", href: "/allrooms" },
     { name: "About Us", href: "/about" },
-    ...(user ? [{ name: "My Bookings", href: "/bookings" }] : []),
+    ...(user ? [{ name: "My Bookings", href: "/mybookings" }] : []),
   ];
 
   const isActive = (href) => location.pathname === href;

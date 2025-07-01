@@ -1,10 +1,10 @@
 import React, { Suspense, useEffect, useState } from "react";
 import Herobanner from "../Components/Herobanner";
-import Cards from "../Components/Cards";
+
 import { useLoaderData } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import { Slide } from "react-awesome-reveal";
-import Gallery from "../Components/Gallery";
+
 import RoomCarousel from "../Components/Slider/HeroBanner";
 import RoomCategories from "../Components/Category/RoomCategories";
 import FeaturedRoomsSection from "../Components/FeaturedRoomsSection/FeaturedRoomsSection";

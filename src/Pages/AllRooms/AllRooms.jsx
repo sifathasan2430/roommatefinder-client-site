@@ -53,11 +53,11 @@ const AllRooms = () => {
   
 
   // Set initial category filter if coming from category page
-  // useEffect(() => {
-  //   if (category) {
-  //     setFilters(prev => ({ ...prev, category }));
-  //   }
-  // }, [category]);
+  useEffect(() => {
+    if (category) {
+      setFilters(prev => ({ ...prev, category }));
+    }
+  }, [category]);
 
   const fetchRooms = async () => {
     setLoading(true);

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const categories = [
   {
@@ -97,8 +98,8 @@ const RoomCategories = () => {
                   <p className="text-gray-600 mb-6 flex-grow">
                     {category.description}
                   </p>
-                  <button className="px-6 py-2 bg-amber-500 text-white font-medium rounded-full hover:bg-amber-600 transition-colors">
-                    View Options
+                  <button  className="px-6 py-2 bg-amber-500 text-white font-medium rounded-full hover:bg-amber-600 transition-colors">
+                    <Link to={`/allrooms`}>View rooms</Link>
                   </button>
                 </div>
               </motion.div>

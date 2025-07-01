@@ -9,17 +9,22 @@ import SignUp from './Components/SignUp.jsx'
 import Login from './Components/Login.jsx'
 import AuthContextProvider from './Context/AuthContextProvider.jsx'
 import PrivateRoute from './Components/PrivateRoute.jsx'
-import MyListings from './Components/MyListings.jsx'
-import AddToFindRoommate from './Components/AddtoFindRoommate.jsx'
+
+
 import Home from './layout/Home.jsx'
 import DetailsPage from './Components/DetailsPage.jsx'
 import Loader from './Components/Loader.jsx'
-import BrowserListingPage from './Components/BrowserLisTingPage.jsx'
-import UpdatePost from './Components/UpdatePost.jsx'
+
+
 import AllRooms from './Pages/AllRooms/AllRooms.jsx'
 import BookingForm from './Pages/Booking/BookingForm/BookingForm.jsx'
 import MyBookings from './Pages/MyBookings/MyBookings.jsx'
 import filter from '../Filter.jsx'
+import DashboardOverview from './layout/AdminLayout/Dashboard/DashboardOverview.jsx'
+
+import AddListingForm from './Components/AddListingForm/AddListingForm.jsx'
+import AdminRoot from './layout/AdminLayout/AdminRoot/AdminRoot.jsx'
+import ListingsTable from './Components/Listtingtable/ListtingsTable.jsx'
 
 const router=createBrowserRouter([{
   path:"/",
@@ -40,12 +45,7 @@ const router=createBrowserRouter([{
     Component:Login
   },
  
-  {
-   path:'addtofindroommate',
-    element:<PrivateRoute>
-     <AddToFindRoommate></AddToFindRoommate>
-    </PrivateRoute>
-    },
+  
     {
       path:"/allrooms",
       element:<AllRooms></AllRooms>
@@ -63,21 +63,8 @@ const router=createBrowserRouter([{
       path:"/bookingpage/:id",
       element:<PrivateRoute><BookingForm></BookingForm></PrivateRoute>
     },
-    {
-      path:"/browserlisting",
-      loader:()=>fetch("https://roommatefinder-server-site.vercel.app/allpost"),
-      element:<Suspense fallback={<Loader></Loader>}>
-        <BrowserListingPage></BrowserListingPage>
-      </Suspense>
-    },
-    {
-      path:"/mylisting",
-      element:<Suspense>
-        <PrivateRoute>
-          <MyListings></MyListings>
-        </PrivateRoute>
-      </Suspense>
-    },
+    
+   
     {
       path:"/mybookings",
       element:<PrivateRoute>
@@ -88,14 +75,7 @@ const router=createBrowserRouter([{
 
 
 
-    {
-      path:"/update/:id",
-      
-      loader:({params})=>fetch(`https://roommatefinder-server-site.vercel.app/viewdetails/${params.id}`),
-      element:<Suspense>
-      <UpdatePost></UpdatePost>
-      </Suspense>
-    },
+   
     {
       path:'/host',
       element:<div>loading </div>
@@ -104,10 +84,25 @@ const router=createBrowserRouter([{
       path:"/about",
      Component:filter
     },
+
+    //admin
+   
+      
   
 
 ]
-}])
+},
+  {
+  path: '/dashboard',
+  element: <PrivateRoute >  <AdminRoot /> </PrivateRoute>,
+  children: [
+    { index: true, element: <DashboardOverview /> },
+    { path: 'add-listing', element: <AddListingForm /> },
+    { path: 'listings', element: <ListingsTable /> },
+  ]
+}
+
+])
 createRoot(document.getElementById('root')).render(
   <StrictMode>
      <AuthContextProvider>
