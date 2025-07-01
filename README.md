@@ -1,4 +1,4 @@
-# 🏠 Roommate Finder - Room Booking Web App
+![image](https://github.com/user-attachments/assets/8bc88d64-4850-438c-9cbf-0a2ae0940a16)# 🏠 Roommate Finder - Room Booking Web App
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=flat&logo=web)](https://roomatefinder-5e9a6.web.app/)
 
@@ -11,7 +11,7 @@ A full-stack room booking platform where users can search and book apartments, a
 <details>
   <summary>Click to view screenshots</summary>
 
-  <img src="your-big-image-path.png" alt="App Screenshot" style="max-width: 100%; height: auto; overflow: auto;" />
+  <img src="https://i.ibb.co/G37pzmz1/roomatefinder-5e9a6-web-app-3.png" alt="App Screenshot" style="max-width: 100%; height: auto; overflow: auto;" />
 </details>
 
 ---
@@ -48,8 +48,8 @@ A full-stack room booking platform where users can search and book apartments, a
 | Firebase Auth     | Authentication                  |
 | Lucide React     | Icons                            |
 | Tailwind CSS     | Styling                          |
-| Node.js + Express (optional) | Backend (API routes if used) |
-| MongoDB (optional) | Database (if backend is used)   |
+| Node.js + Express (optional) | Backend (API routes ) |
+| MongoDB  | Database    |
 
 ---
 
