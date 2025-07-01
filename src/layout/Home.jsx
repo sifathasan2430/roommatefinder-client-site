@@ -5,7 +5,7 @@ import { useLoaderData } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import { Slide } from "react-awesome-reveal";
 import Gallery from "../Components/Gallery";
-import RoomCarousel from "../Components/Slider/RoomCarousel";
+import RoomCarousel from "../Components/Slider/HeroBanner";
 import RoomCategories from "../Components/Category/RoomCategories";
 import FeaturedRoomsSection from "../Components/FeaturedRoomsSection/FeaturedRoomsSection";
 import WhyChooseUs from "../Components/WhyChooseSection/WhyChooseUs";
@@ -13,7 +13,8 @@ import ReviewSection from "../Components/ReviewSection/ReviewSection";
 import PaymentSlider from "../Components/PaymentSlider/PaymentSlider";
 import axios from "axios";
 import Loader from "../Components/Loader";
-
+import HeroBanner from "../Components/Slider/HeroBanner";
+ 
 const Home = () => {
   
     const [featuredRooms,setFeaturedRooms]=useState([])
@@ -27,7 +28,8 @@ const Home = () => {
   return (
   
     <div className="">
-      <RoomCarousel></RoomCarousel>
+     <HeroBanner></HeroBanner>
+    
       <RoomCategories></RoomCategories>
     
   <FeaturedRoomsSection featuredRooms={featuredRooms} ></FeaturedRoomsSection>

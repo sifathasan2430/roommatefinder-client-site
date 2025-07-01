@@ -72,14 +72,14 @@ const SignUp = () => {
                             onClick={() => setUserType('user')}
                             className={`flex-1 py-2 px-4 text-sm sm:text-base font-medium transition-colors ${userType === 'user' ? 'bg-[#f89200] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                         >
-                            Book Rooms
+                            User
                         </button>
                         <button
                             type="button"
                             onClick={() => setUserType('host')}
                             className={`flex-1 py-2 px-4 text-sm sm:text-base font-medium transition-colors ${userType === 'host' ? 'bg-[#f89200] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                         >
-                            Host Rooms
+                             Host
                         </button>
                     </div>
 
