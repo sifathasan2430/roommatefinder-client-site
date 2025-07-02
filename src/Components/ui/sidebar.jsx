@@ -47,7 +47,7 @@ export function Sidebar() {
       </Sheet>
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex flex-col w-[250px] h-screen fixed top-0 left-0 border-r bg-white z-40">
+      <div className="hidden md:flex flex-col md:w-[250px] h-screen fixed top-0 left-0 border-r bg-white z-40">
         <div className="space-y-4 py-4 overflow-y-auto">
           <div className="px-3 py-2">
             <h2 className="mb-2 px-4 text-lg font-semibold">Apartment Manager</h2>

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-
+import logo from '../../assets/logo.png'
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -32,8 +32,10 @@ const Navbar = () => {
       <div className="container flex h-16 items-center justify-between px-4 mx-auto">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-[#ff8c00]"></div>
-          <span className="text-xl font-bold">Apartment Haven</span>
+          <div className="h-8 w-8 rounded-full bg-[#ff8c00]">
+            <img src={logo} alt="Logo" className="h-full w-full" />
+          </div>
+          <span className="text-xl font-bold">Roomfinder</span>
         </Link>
 
         {/* Desktop Nav */}

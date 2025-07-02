@@ -25,6 +25,7 @@ import DashboardOverview from './layout/AdminLayout/Dashboard/DashboardOverview.
 import AddListingForm from './Components/AddListingForm/AddListingForm.jsx'
 import AdminRoot from './layout/AdminLayout/AdminRoot/AdminRoot.jsx'
 import ListingsTable from './Components/Listtingtable/ListtingsTable.jsx'
+import UpdateListingForm from './Components/UpdateListingForm/UpdateListingForm.jsx'
 
 const router=createBrowserRouter([{
   path:"/",
@@ -76,14 +77,8 @@ const router=createBrowserRouter([{
 
 
    
-    {
-      path:'/host',
-      element:<div>loading </div>
-    },
-    {
-      path:"/about",
-     Component:filter
-    },
+    
+
 
     //admin
    
@@ -97,8 +92,12 @@ const router=createBrowserRouter([{
   element: <PrivateRoute >  <AdminRoot /> </PrivateRoute>,
   children: [
     { index: true, element: <DashboardOverview /> },
-    { path: 'add-listing', element: <AddListingForm /> },
-    { path: 'listings', element: <ListingsTable /> },
+    { path: '/dashboard/add-listing', element: <AddListingForm /> },
+    { path: '/dashboard/listings', element: <ListingsTable /> },
+    {
+      path:'/dashboard/update-form/:id',
+      element:<UpdateListingForm></UpdateListingForm>
+    }
   ]
 }
 

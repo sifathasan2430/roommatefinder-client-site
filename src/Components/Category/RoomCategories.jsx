@@ -32,6 +32,7 @@ const categories = [
   },
 ];
 
+
 const cardVariants = {
   offscreen: {
     y: 50,
@@ -60,6 +61,7 @@ const hoverVariants = {
 };
 
 const RoomCategories = () => {
+  
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -82,7 +84,7 @@ const RoomCategories = () => {
             >
               <motion.div
                 variants={hoverVariants}
-                className="bg-white rounded-xl shadow-lg overflow-hidden w-full h-full flex flex-col"
+                className="hover:scale-105 hover:bg-amber-500 transition-transform duration-300 cursor-pointer relative  rounded-xl shadow-lg overflow-hidden w-full h-full flex flex-col"
               >
                 <div className="p-6 flex flex-col items-center text-center flex-grow">
                   <div className="bg-amber-100 p-4 rounded-full mb-4">
@@ -98,7 +100,7 @@ const RoomCategories = () => {
                   <p className="text-gray-600 mb-6 flex-grow">
                     {category.description}
                   </p>
-                  <button  className="px-6 py-2 bg-amber-500 text-white font-medium rounded-full hover:bg-amber-600 transition-colors">
+                  <button   className="px-6 py-2 bg-amber-500 text-white font-medium rounded-full hover:bg-amber-600 hover:border-amber-600 hover:border-2 transition-colors">
                     <Link to={`/allrooms`}>View rooms</Link>
                   </button>
                 </div>

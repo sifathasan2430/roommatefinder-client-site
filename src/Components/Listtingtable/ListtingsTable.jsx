@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,45 +8,49 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import axios from "axios";
+import UserAuthContext from "../../Context/Context";
+import { useNavigate } from "react-router-dom";
 
 const ListingsTable = () => {
-  const [listings, setListings] = useState([
-    {
-      id: "1",
-      name: "John Doe",
-      email: "john@example.com",
-      title: "Private Room in Atlanta",
-    },
-    {
-      id: "2",
-      name: "Jane Smith",
-      email: "jane@example.com",
-      title: "Luxury Apartment Downtown",
-    },
-    {
-      id: "3",
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      title: "Cozy Studio Near Campus",
-    },
-  ]);
+  const navigate=useNavigate()
+  const {user}=useContext(UserAuthContext)
+  const [listings, setListings] = useState([]);
+  useEffect(() => {
+    if (!user?.email) return; 
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "This listing will be deleted permanently.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#ff8c00",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setListings((prev) => prev.filter((item) => item.id !== id));
-        Swal.fire("Deleted!", "Listing has been deleted.", "success");
+    axios.get(`https://roommatefinder-server-site.vercel.app/admin/apartments?email=${user.email}`)
+      .then((response) => {
+        setListings(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching apartments:', error);
+      });
+
+  }, [user])
+ const handleDelete = async (id) => {
+  const confirm = await Swal.fire({
+    title: 'Are you sure?',
+    text: 'You won’t be able to revert this!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+  });
+
+  if (confirm.isConfirmed) {
+    try {
+      const res = await axios.delete(`https://roommatefinder-server-site.vercel.app/admin/delete-listing/${id}`);
+      if (res.status === 200) {
+        Swal.fire('Deleted!', 'Listing has been deleted.', 'success');
+        setListings(prev => prev.filter(item => item._id !== id));
       }
-    });
-  };
+    } catch (error) {
+      console.error(error);
+      Swal.fire('Error!', 'Something went wrong.', 'error');
+    }
+  }
+};
+console.log(listings)
 
   return (
     <div className="overflow-x-auto container  py-3 mx-auto  mt-6 rounded-lg ">
@@ -61,10 +65,10 @@ const ListingsTable = () => {
         </thead>
         <tbody>
           {listings.map((item) => (
-            <tr key={item.id} className="border-t">
-              <td className="px-4 py-2">{item.name}</td>
-              <td className="px-4 py-2">{item.email}</td>
-              <td className="px-4 py-2">{item.title}</td>
+            <tr key={item._id} className="border-t">
+              <td className="px-4 py-2">{item?.postedBy?.name}</td>
+              <td className="px-4 py-2">{item?.postedBy?.email}</td>
+              <td className="px-4 py-2">{item?.title}</td>
               <td className="px-4 py-2">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -73,12 +77,12 @@ const ListingsTable = () => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <DropdownMenuItem onClick={() => alert(`Edit ${item.id}`)}>
+                    <DropdownMenuItem onClick={() =>navigate(`/dashboard/update-form/${item._id}`)}>
                       <Edit className="mr-2 h-4 w-4" />
                       Edit
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => handleDelete(item.id)}
+                      onClick={() => handleDelete(item?._id)}
                       className="text-red-500"
                     >
                       <Trash2 className="mr-2 h-4 w-4" />

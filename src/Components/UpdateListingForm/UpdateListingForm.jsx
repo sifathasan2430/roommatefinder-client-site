@@ -1,37 +1,29 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Swal from 'sweetalert2';
+import UserAuthContext from '../../Context/Context';
+import { useParams } from 'react-router-dom';
 
-const AddListingForm = () => {
+const UpdateListingForm = () => {
+    const {id}=useParams()
+    const {user}=useContext(UserAuthContext)
   const [formData, setFormData] = useState({
-    title: '',
-    subtitle: '',
-    location: {
-      street: '',
-      city: '',
-      state: '',
-      zip: ''
-    },
-    category: 'Private Room',
-    roomType: 'Single',
-    lifestyle: '',
-    description: '',
-    amenities: [],
-    rent: '',
-    currency: 'USD',
-    isFeatured: false,
-    availability: {
-      status: 'Available',
-      fromDate: ''
-    },
-    photos: [''],
-    postedBy: {
-      name: '',
-      email: '',
-      phone: ''
-    }
+    
   });
+
+  useEffect(() => {
+    if (!user?.email) return; 
+
+    axios.get(`https://roommatefinder-server-site.vercel.app/room/${id}`)
+      .then((response) => {
+        setFormData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching apartments:', error);
+      });
+
+  }, [user])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -89,45 +81,25 @@ const AddListingForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://roommatefinder-server-site.vercel.app/admin/add-listing', formData);
-      if (response.data?.insertedId) {
-        Swal.fire({
-  title: "Good job!",
-  text: "Data update",
-  icon: "success"
-});
-        setFormData({
-          title: '',
-          subtitle: '',
-          location: { street: '', city: '', state: '', zip: '' },
-          category: 'Private Room',
-          roomType: 'Single',
-          lifestyle: '',
-          description: '',
-          amenities: [],
-          rent: '',
-          currency: 'USD',
-          isFeatured: false,
-          availability: {
-            status: 'Available',
-            fromDate: ''
-          },
-          photos: [''],
-          postedBy: {
-            name: '',
-            email: '',
-            phone: ''
-          }
-        });
-      } else {
-        Swal.fire({
-  icon: "error",
-  title: "Oops...",
-  text: "Failed to add listing. Please try again",
-  footer: '<a href="#">Why do I have this issue?</a>'
-});
-      
-      }
+      const response = await axios.put(`http://localhost:3000/admin/update-listing/${id}`, formData);
+     if (response.data?.result?.modifiedCount > 0) {
+  Swal.fire({
+    title: "Success!",
+    text: "Listing updated successfully!",
+    icon: "success"
+  });
+
+ 
+
+} else {
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "Failed to update listing. Please try again.",
+    footer: '<a href="#">Why do I have this issue?</a>'
+  });
+}
+
     } catch (error) {
       console.error('Error:', error);
       
@@ -270,4 +242,4 @@ const AddListingForm = () => {
   );
 };
 
-export default AddListingForm;
+export default UpdateListingForm;
