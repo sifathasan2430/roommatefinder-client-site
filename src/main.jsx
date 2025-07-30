@@ -2,21 +2,37 @@ import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './layout/Root.jsx'
 import Errorpage from './Components/Errorpage.jsx'
 import SignUp from './Components/SignUp.jsx'
 import Login from './Components/Login.jsx'
 import AuthContextProvider from './Context/AuthContextProvider.jsx'
-import Privateroute from './Components/Privateroute.jsx'
-import MyListings from './Components/MyListings.jsx'
-import AddToFindRoommate from './Components/AddtoFindRoommate.jsx'
+import PrivateRoute from './Components/PrivateRoute.jsx'
+
+
 import Home from './layout/Home.jsx'
 import DetailsPage from './Components/DetailsPage.jsx'
 import Loader from './Components/Loader.jsx'
-import BrowserListingPage from './Components/BrowserLisTingPage.jsx'
-import UpdatePost from './Components/UpdatePost.jsx'
 
+
+import AllRooms from './Pages/AllRooms/AllRooms.jsx'
+import BookingForm from './Pages/Booking/BookingForm/BookingForm.jsx'
+import MyBookings from './Pages/MyBookings/MyBookings.jsx'
+import filter from '../Filter.jsx'
+import DashboardOverview from './layout/AdminLayout/Dashboard/DashboardOverview.jsx'
+
+import AddListingForm from './Components/AddListingForm/AddListingForm.jsx'
+import AdminRoot from './layout/AdminLayout/AdminRoot/AdminRoot.jsx'
+import ListingsTable from './Components/Listtingtable/ListtingsTable.jsx'
+import UpdateListingForm from './Components/UpdateListingForm/UpdateListingForm.jsx'
+import { Provider } from 'react-redux'
+
+import LoginForm from './Components/Login/LoginForm.jsx'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { persistor, store } from './Store/Store.js'
+import { PersistGate } from 'redux-persist/integration/react'
+const queryClient = new QueryClient()
 const router=createBrowserRouter([{
   path:"/",
   Component:Root,
@@ -33,54 +49,75 @@ const router=createBrowserRouter([{
   }, 
   {
     path:"/login",
-    Component:Login
+    Component:LoginForm
   },
  
-  {
-   path:'addtofindroommate',
-    element:<Privateroute>
-     <AddToFindRoommate></AddToFindRoommate>
-    </Privateroute>
+  
+    {
+      path:"/allrooms",
+      element:<AllRooms></AllRooms>
     },
     { 
-      path:"/details/:id",
-      loader:({params})=>fetch(`https://roommatefinder-server-site.vercel.app/viewdetails/${params.id}`),
+      path:"/room/:id",
+      loader:({params})=>fetch(`https://roommatefinder-server-site.vercel.app/room/${params.id}`),
       
        element:<Suspense fallback={<Loader></Loader>}>
-       <Privateroute>
+       <PrivateRoute>
      <DetailsPage></DetailsPage>
-    </Privateroute></Suspense>
+    </PrivateRoute></Suspense>
     },
     {
-      path:"/browserlisting",
-      loader:()=>fetch("https://roommatefinder-server-site.vercel.app/allpost"),
-      element:<Suspense fallback={<Loader></Loader>}>
-        <BrowserListingPage></BrowserListingPage>
-      </Suspense>
+      path:"/bookingpage/:id",
+      element:<PrivateRoute><BookingForm></BookingForm></PrivateRoute>
     },
+    
+   
     {
-      path:"/mylisting",
-      element:<Suspense>
-        <Privateroute>
-          <MyListings></MyListings>
-        </Privateroute>
-      </Suspense>
+      path:"/mybookings",
+      element:<PrivateRoute>
+<MyBookings></MyBookings>
+      </PrivateRoute>
     },
-    {
-      path:"/update/:id",
+
+
+
+
+   
+    
+
+
+    //admin
+   
       
-      loader:({params})=>fetch(`https://roommatefinder-server-site.vercel.app/viewdetails/${params.id}`),
-      element:<Suspense>
-      <UpdatePost></UpdatePost>
-      </Suspense>
-    }
+  
 
 ]
-}])
+},
+  {
+  path: '/dashboard',
+  element:  <AdminRoot /> ,
+  children: [
+    {path:'/dashboard/adminOverView', element: <DashboardOverview /> },
+    { path: '/dashboard/add-listing', element: <AddListingForm /> },
+    { path: '/dashboard/listings', element: <ListingsTable /> },
+    {
+      path:'/dashboard/update-form/:id',
+      element:<UpdateListingForm></UpdateListingForm>
+    }
+  ]
+}
+
+])
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-     <AuthContextProvider>
-     <RouterProvider router={router} ></RouterProvider>
+   <QueryClientProvider client={queryClient}>
+     <Provider store={store}>
+       <PersistGate loading={null} persistor={persistor}>
+        <AuthContextProvider>
+     <RouterProvider  router={router} ></RouterProvider>
      </AuthContextProvider>
+       </PersistGate>
+    </Provider>
+   </QueryClientProvider>
   </StrictMode>,
 )

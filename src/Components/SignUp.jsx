@@ -1,116 +1,214 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import UserAuthContext from '../Context/Context';
 import Swal from 'sweetalert2';
-
+import { Button, Input } from './Navbar';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import {AuthUser, Token } from '../features/auth/authSlice';
+import axios from 'axios';
+import { getAuth } from 'firebase/auth';
+import GoogleBtn from './Navbar/GoogleBtn';
 
 const SignUp = () => {
-    const {setLoading,user,setUser, loginWithGoogle,createNewUser,updateUserProfile}=useContext(UserAuthContext)
-  
-    const userDataHandler=(e)=>{
-        e.preventDefault()
-       
-        const form=e.target
-        const FormDataCollect=new FormData(form)
-        const inputData=Object.fromEntries(FormDataCollect.entries())
-        const userEmail=FormDataCollect.get('email')
-        const userPassword=FormDataCollect.get('password')
-        const {displayName,photoUrl}=inputData
-        
+    const {    createNewUser, updateUserProfile } = useContext(UserAuthContext);
+    const [loading, setLoading] = useState(false);
+   const dispatch=useDispatch()
+    const navigate = useNavigate();
+    const [error,setError]=useState('')
+    const {register,handleSubmit}=useForm()
 
+    const registerUser = async (data) => {
+  setError('');
+  setLoading(true)
+  const { email, password, name, photoURL } = data;
 
-       
-        const passwordRegex=/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-        const isValid=passwordRegex.test(userPassword)
-        if (!isValid){
-           return Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Must have an Uppercase letter in the password ,Must have a Lowercase letter in the password  Length must be at least 6 character",
-                        footer: '<a href="#">Why do I have this issue?</a>'
-                            })
-                      }
+  try {
+    const response = await createNewUser(email, password);
 
-        createNewUser(userEmail,userPassword).then((userCredential) => {
-    
-    const user = userCredential.user
-    setLoading(false)
-   updateUserProfile(displayName,photoUrl).then(() => {
-      setUser({...user,photoUrl})
-}).catch((error) => {
- 
-});
+    if (response.user) {
+      const token = await response.user.getIdToken();
 
-    Swal.fire({
-  title: "Profile created successfully",
-  icon: "success",
-  draggable: true
-});
-    
-  
-  })
-  .catch((error) => {
-    
-    const errorMessage = error.message;
-    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: errorMessage,
-                        footer: '<a href="#">Why do I have this issue?</a>'
-                            })
-    // ..
-  });                  
-       
-     
+      // Step 1: Update Firebase profile
+      try {
+        await updateUserProfile(name, photoURL);
+
+        // Step 2: Get latest user info
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
+
+        if (currentUser) {
+          const userInfo = {
+            email: currentUser.email,
+            name: currentUser.displayName,
+            photoURL: currentUser.photoURL,
+            role: 'user', // default role
+          };
+
+          // Step 3: Send user to backend
+      await axios.post(`https://roommatefinder-server-site.vercel.app/api/user`, userInfo)
+          
+           
+
+          // Step 4: Dispatch to Redux
+          dispatch(AuthUser(userInfo));
+          dispatch(Token(token));
+
+          //  Navigate to HomePage
+          navigate('/');
+        }
+      } catch (error) {
+        console.error(error);
+        setError(error.message);
+      } finally{
+        setLoading(false)
+      }
     }
+  } catch (error) {
+    setError(error.message);
+  }
+};
+
+
     return (
-      <div  className="bg-gray-100 min-h-screen my-20 flex items-center justify-center ">
+        <div className="min-h-[70vh] bg-gray-100 flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+            <div className="w-full max-w-4xl bg-white shadow-xl rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+                <div className="p-6 sm:p-8 lg:p-10">
+                    <h2 className="text-2xl font-bold text-[#f89200] mb-6 text-center">Create Account</h2>
 
+                    <div className="flex mb-6 rounded-lg overflow-hidden border border-gray-200">
+                       
+                       
+                    </div>
 
-  <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-    <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">Create an Account</h2>
-
-    <form onSubmit={userDataHandler}>
-      <div className="mb-4">
-        <label className="block  text-gray-700 font-semibold">Full Name</label>
-        <input type="text" name='displayName' placeholder="Your name"
-               className="w-full text-xl font-semibold text-black px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-gray-700 border-blue-300 font-semibold">Email Address</label>
-        <input type="email" name='email' placeholder="you@example.com"
-               className="w-full text-xl font-semibold text-black border-blue-300 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required/>
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-gray-700 border-blue-300 font-semibold">Password</label>
-        <input type="password" name='password' placeholder="********" value={'123456sS'}
-               className="w-full text-xl font-semibold text-black border-blue-300 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required/>
-      </div>
-
-      <div className="mb-6">
-        <label className="block text-gray-700  font-semibold">PhotoURL</label>
-        <input type="text" name='photoUrl' placeholder=""
-               className="w-full text-xl font-semibold text-black px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required/>
-      </div>
-
-      <button type="submit"
-              className="w-full  bg-blue-500 font-semibold hover:bg-blue-600 text-white py-2 rounded-md transition duration-300 ">
-        Sign Up
-      </button>
-     <div className='text-center my-2'>
-         <button onClick={()=>loginWithGoogle()} className="btn w-full bg-white text-black border-[#e5e5e5]">
-  <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
-  Login with Google
-</button>
-     </div>
-    </form>
-
-    <p className="text-sm text-center text-gray-600 font-semibold mt-4">
-      Already have an account? <a href="#" className="text-blue-500 hover:underline">Login</a>
-    </p>
+   {error && (
+  <div className="bg-red-100 text-red-800 p-3 rounded-md mb-4 border border-red-200 text-sm">
+    {error}
   </div>
-  </div>
+)}
+
+                    <form onSubmit={handleSubmit(registerUser)}  className="space-y-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div className="sm:col-span-2">
+                                
+                                <Input
+                                    type="text"
+                                   label='Full Name'
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-[#f89200] focus:border-[#f89200]"
+                                    required
+                                    {...register('name',{required:true})}
+                                />
+                            </div>
+
+                            <div className="sm:col-span-2">
+                               
+                                <Input
+                                    type="email"
+                                    label='Email'
+                    
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-[#f89200] focus:border-[#f89200]"
+                                    {...register('email',{required:true})}
+                                />
+                            </div>
+
+                            <div>
+                                
+                                <Input
+                                    type="password"
+                                   label='Password'
+                                
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-[#f89200] focus:border-[#f89200]"
+                                    {...register('password',{
+                                        required:true,
+                                        pattern:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/
+                                    })}
+                                />
+                            </div>
+
+                            <div>
+                                
+                                <Input
+                                    type="text"
+                                    label='PhotoURL'
+                                    {...register('photoURL')}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-[#f89200] focus:border-[#f89200]"
+                                />
+                            </div>
+                        </div>
+
+                       
+
+                        <Button
+  type="submit"
+  disabled={loading}
+  className={`w-full mt-4 bg-[#f89200] hover:bg-[#e08300] text-white font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center gap-2 ${loading ? 'opacity-60 cursor-not-allowed' : ''}`}
+>
+  {loading ? (
+    <>
+      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        />
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v8H4z"
+        />
+      </svg>
+      Creating...
+    </>
+  ) : (
+    'Sign Up as User'
+  )}
+</Button>
+                    </form>
+
+                    <div className="mt-6">
+                    <GoogleBtn/>
+                    </div>
+
+                    <p className="mt-4 text-center text-sm text-gray-600">
+                        Already have an account?{' '}
+                        <NavLink to="/login" className="text-[#f89200] hover:text-[#e08300] font-medium">
+                            Login
+                        </NavLink>
+                    </p>
+                </div>
+
+                {/* Right Column - Image/Info */}
+                <div className="hidden lg:flex bg-gradient-to-br from-[#f89200] to-[#ffac33] items-center justify-center p-8 text-white">
+                    <div className="text-center">
+                        <h3 className="text-2xl font-bold mb-4">Welcome to RoomFinder</h3>
+                        <p className="mb-6">Find the perfect space for your needs or share your extra space with others.</p>
+                        <div className="space-y-4 text-left">
+                            <div className="flex items-start">
+                                <svg className="h-5 w-5 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                <span>Easy booking process</span>
+                            </div>
+                            <div className="flex items-start">
+                                <svg className="h-5 w-5 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                <span>Secure payments</span>
+                            </div>
+                            <div className="flex items-start">
+                                <svg className="h-5 w-5 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                <span>24/7 customer support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import UserAuthContext from "../Context/Context";
-import { useLoaderData } from "react-router";
+import { useLoaderData } from "react-router-dom";
 
 const UpdatePost = () => {
   const { user } = useContext(UserAuthContext);

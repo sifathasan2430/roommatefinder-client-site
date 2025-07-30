@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import UserAuthContext from '../Context/Context';
-import { Navigate } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import Loader from './Loader';
 
-const Privateroute = ({children}) => {
+const PrivateRoute = ({children}) => {
     const {user,loading}=useContext(UserAuthContext)
     if (loading) return <Loader></Loader>
     if (!user){
@@ -16,4 +16,4 @@ const Privateroute = ({children}) => {
     
 };
 
-export default Privateroute;
+export default PrivateRoute;

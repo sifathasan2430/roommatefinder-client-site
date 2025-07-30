@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import UserAuthContext from "../Context/Context";
 
 import Loader from "./Loader";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const MyListings = () => {
