@@ -2,7 +2,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=flat&logo=web)](https://roomatefinder-5e9a6.web.app/)
 <div style="overflow-x: auto; max-width: 100%;">
-  <img src="https://i.ibb.co/F41JGRKX/png.jpg" alt="Website Screenshot" style="min-width: 800px; max-width: none;">
+  <img src="https://i.ibb.co/F41JGRKX/png.jpg" alt="Website Screenshot" ">
 </div>
 A full-stack room booking platform where users can search and book apartments, and admins can manage listings via a secure admin panel.
 
