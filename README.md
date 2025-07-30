@@ -1,9 +1,7 @@
 🏠 Roommate Finder - Room Booking Web App
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=flat&logo=web)](https://roomatefinder-5e9a6.web.app/)
-<div style="overflow-x: auto; max-width: 100%;">
-  <img src="https://i.ibb.co/F41JGRKX/png.jpg" alt="Website Screenshot" ">
-</div>
+
 A full-stack room booking platform where users can search and book apartments, and admins can manage listings via a secure admin panel.
 
 ---
@@ -13,7 +11,9 @@ A full-stack room booking platform where users can search and book apartments, a
 <details>
   <summary>Click to view screenshots</summary>
 
-  <img src="https://i.ibb.co/G37pzmz1/roomatefinder-5e9a6-web-app-3.png" alt="App Screenshot" style="max-width: 100%; height: auto; overflow: auto;" />
+ <div style="overflow-x: auto; max-width: 100%;">
+  <img src="https://i.ibb.co/F41JGRKX/png.jpg" alt="Website Screenshot" ">
+</div>
 </details>
 
 ---
