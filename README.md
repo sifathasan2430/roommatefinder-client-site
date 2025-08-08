@@ -46,17 +46,19 @@ A full-stack room booking platform where users can search and book apartments, a
 
 ---
 
-## 🧰 Tech Stack
-
+## 🔧 Tech Stack
 | Tech              | Use                             |
 |------------------|----------------------------------|
-| React.js         | Frontend framework               |
-| React Router DOM | Routing                          |
-| Firebase Auth     | Authentication                  |
-| Lucide React     | Icons                            |
-| Tailwind CSS     | Styling                          |
-| Node.js + Express (optional) | Backend (API routes ) |
-| MongoDB  | Database    |
+| React.js         | Frontend framework for building UI components |
+| React Router DOM | Client-side routing and navigation |
+| Firebase Auth     | User authentication and authorization |
+| Lucide React     | Icon library for UI elements |
+| Tailwind CSS     | Utility-first CSS framework for styling |
+| React Hook Form  | Form state management, validation, and custom component integration with forwardRef |
+| TanStack Query   | Server state management, data fetching, caching, and race condition prevention |
+| Debounce         | Optimizing search inputs by delaying API calls until user stops typing |
+| Node.js + Express | Backend API routes and server logic (optional setup) |
+| MongoDB  | NoSQL database for storing application data |
 
 ---
 
