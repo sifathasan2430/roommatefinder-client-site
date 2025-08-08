@@ -1,4 +1,4 @@
-🏠 Roommate Finder - Room Booking Web App
+🏠 RoommFinder - Room Booking Web App
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=flat&logo=web)](https://roomatefinder-5e9a6.web.app/)
 
