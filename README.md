@@ -27,6 +27,11 @@ A full-stack room booking platform where users can search and book apartments, a
 ## 🎯 Features
 
 ### 👤 User Features:
+  - Added "🧩 Custom UI Components" feature explaining forwardRef implementation
+  - Added "📝 React Hook Form" feature for optimized form handling
+  - Added "⏱️ Debounced Search" feature explaining the 500ms debounce implementation
+  - Enhanced "🌐 TanStack Query" feature to highlight race condition prevention
+
 - 🔍 **Filter & Search** apartments by category, location, price, and amenities
 - 🏠 **View apartment details** with images, features, and availability
 - 🗓️ **Book available apartments** with preferred move-in and move-out dates
