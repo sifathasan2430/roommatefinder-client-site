@@ -50,7 +50,7 @@ const ListingsTable = () => {
     }
   }
 };
-console.log(listings)
+
 
   return (
     <div className="overflow-x-auto container  py-3 mx-auto  mt-6 rounded-lg ">

@@ -1,24 +1,31 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+
+
 import { FaMapMarkerAlt, FaStar, FaFilter, FaSearch } from "react-icons/fa";
-import { useNavigate, useParams } from "react-router-dom";
+
 import { motion } from "framer-motion";
-import RoomCard from "../../Components/RoomCard/RoomCard";
+import {RoomCardSkeleton,RoomCategories,RoomFilters,NoDataFound,RoomCard} from './allPageComponets/index' 
 import { useQuery } from "@tanstack/react-query";
+
+
+import { useDispatch, useSelector } from "react-redux";
 import getFilteredRooms from "../../customApi/customApi";
-import NoDataFound from "../../Components/allPageComponets/NoDataFound";
-import RoomCardSkeleton from "../../Components/allPageComponets/RoomCardSkeleton";
-import RoomFilters from "../../Components/allPageComponets/RoomFilters";
-import { useSelector } from "react-redux";
+import { Button, Input } from "../../Components/Navbar";
+import { useState } from "react";
+import { setLocation as findLocation } from "../../features/filters/filterSlice";
 
 
 const AllRooms = () => {
-  const navigate = useNavigate();
+    
   const filters=useSelector((state)=>state.filters)
+  
+  const dispatch=useDispatch()
+  const [location,setLocation]=useState('')
+
   const { data: rooms, isLoading } = useQuery({
-    queryKey: ["rooms",filters], // safer to use array for queryKey
+    queryKey: ["rooms",filters], 
     queryFn: () => getFilteredRooms(filters),
   });
+  
   
   return (
     <div className=" min-h-screen">
@@ -39,6 +46,7 @@ const AllRooms = () => {
           {/* Filters Sidebar */}
           
                <RoomFilters rooms={rooms}/>
+             
           {/* Rooms List */}
           <div className="lg:w-3/4">
             <div className="flex justify-between items-center mb-6">
@@ -50,6 +58,10 @@ const AllRooms = () => {
 
             { rooms && rooms.length>0 ? (
               <div className="grid grid-cols-1 gap-6">
+               <div className="flex gap-2">
+                 <Input  onChange={(e)=>setLocation(e.target.value)}   placeholder='location'  />
+                 <Button onClick={()=>dispatch(findLocation(location))}>Search</Button>
+               </div>
                 {rooms.map((room) => (
                   <RoomCard key={room._id} room={room} />
                 ))}

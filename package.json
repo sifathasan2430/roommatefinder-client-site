@@ -36,6 +36,7 @@
     "react": "^19.1.0",
     "react-awesome-reveal": "^4.3.1",
     "react-dom": "^19.1.0",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.61.1",
     "react-hot-toast": "^2.5.2",
     "react-icon": "^1.0.0",

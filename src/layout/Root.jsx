@@ -7,11 +7,13 @@ import Footer from '../Components/Footer/Footer';
 import Navbar from '../Components/Navbar/Navbar';
 
 
+
 const Root = () => {
     const Navigation=useNavigation()
 
     return (
-        <div className=''>
+       <>
+      
                   <Navbar></Navbar>
          <div className=''>
            {
@@ -19,7 +21,7 @@ const Root = () => {
           }
          </div>
          <Footer></Footer>
-        </div>
+       </> 
     );
 };
 

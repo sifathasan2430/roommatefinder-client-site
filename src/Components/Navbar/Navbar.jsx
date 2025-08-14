@@ -37,7 +37,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
          <Logo/>
-          <span className="text-xl font-bold">Roomfinder</span>
+          
         </Link>
 
         {/* Desktop Nav */}

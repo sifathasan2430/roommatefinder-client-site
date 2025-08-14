@@ -1,5 +1,7 @@
 import { FaFacebookF, FaTwitter, FaInstagram, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Logo } from "../Navbar";
+
 
 const Footer = () => {
   return (
@@ -9,10 +11,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-[#ff8c00] flex items-center justify-center">
-                <span className="text-white font-bold text-lg">AH</span>
-              </div>
-              <span className="text-2xl font-bold text-white">Apartment Haven</span>
+              <Logo/>
             </Link>
             <p className="text-gray-400 leading-relaxed">
               Your trusted platform for finding and booking perfect apartments. We connect property owners with potential tenants seamlessly.

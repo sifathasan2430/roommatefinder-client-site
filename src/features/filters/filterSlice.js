@@ -23,7 +23,7 @@ const filterSlice=createSlice({
         setPriceRange:(state,action)=>{
           const {max,min}=action.payload
          
-      console.log(max,min)
+      
           state.max=max
           state.min=min
         },
@@ -39,5 +39,5 @@ const filterSlice=createSlice({
     }
 })
 
-export const {setCategory,setLocation,setPriceRange,setAmenities}=filterSlice.actions
+export const {setCategory,setLocation,setPriceRange,setAmenities,resetFilters}=filterSlice.actions
 export default filterSlice.reducer

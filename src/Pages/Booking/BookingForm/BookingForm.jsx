@@ -17,7 +17,7 @@ const moveOutRef = useRef();
     agreeTerms: false,
     apartmentId: id
   });
-console.log(id)
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [submitted, setSubmitted] = useState(false);
@@ -50,7 +50,7 @@ console.log(id)
       setLoading(false);
     }
   };
-   console.log(formData);
+  
   if (submitted) {
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">

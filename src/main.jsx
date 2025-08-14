@@ -32,10 +32,11 @@ import LoginForm from './Components/Login/LoginForm.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { persistor, store } from './Store/Store.js'
 import { PersistGate } from 'redux-persist/integration/react'
+import Landing from './Components/Landing/Landing.jsx'
 const queryClient = new QueryClient()
 const router=createBrowserRouter([{
-  path:"/",
-  Component:Root,
+    path:"/",
+  element:<Root></Root>,
   errorElement:<Errorpage></Errorpage>,
   children:[{
        index:true,

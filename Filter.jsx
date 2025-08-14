@@ -38,9 +38,9 @@ const Filter = () => {
    const handleFilterChange=(e)=>{
 
     const{ name,value}=e.target
-    console.log(filter)
+  
     setFilters({...filter,[name]:value})
-    console.log(filter)
+    
    
    }
 
@@ -50,7 +50,7 @@ const Filter = () => {
         [...filter.amenities,amenity]
     }
   ) }
-  console.log(filter)
+  
 
     return (
         <div className=' w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex justify-between  gap-4'>

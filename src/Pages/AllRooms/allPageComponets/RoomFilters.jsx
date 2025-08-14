@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { FaFilter } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
-import { setCategory, setPriceRange } from '../../features/filters/filterSlice';
-import { debounce } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategory, setPriceRange,resetFilters } from '../../../features/filters/filterSlice';
+
 
 const RoomFilters = ({
-    showFilters=false,
+    showFilters=true,
     rooms,
 
-}) => {
+}) => 
+  {
+
+    const minFromRedux=useSelector(state=>state.filters?.min)
+    const maxFromRedux=useSelector(state=>state.filters?.max)
          const dispatch=useDispatch()
-         const [min,setMin]=useState('')
-         const [max,setMax]=useState('') 
-         const filterFunctuion=()=>{
-           dispatch(setPriceRange({max,min}))
-         }
-
-         useEffect(()=>{
-          
-          filterFunctuion()
-
-         },[min,max])
+         const [min,setMin]=useState(minFromRedux)
+         const [max,setMax]=useState(maxFromRedux) 
        
+
+        useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(setPriceRange({ max, min }));
+
+    }, 500); 
+
+    return () => clearTimeout(timer); // cleanup old timer on change
+  }, [min, max, dispatch])
         
     return (
         <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden'} lg:block bg-white p-6 rounded-xl shadow-sm h-fit lg:sticky lg:top-4`}>
@@ -37,7 +41,7 @@ const RoomFilters = ({
                  onChange={(e)=>dispatch(setCategory(e.target.value))}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2"
                 >
-                  <option value="">All Types</option>
+                  <option defaultValue="">All Types</option>
                  {
                     rooms &&  [...new Set(rooms.map((room) => room.category?.name))].map(category=>(<option  key={category} value={category}>{category}</option>))
                  }
@@ -51,7 +55,7 @@ const RoomFilters = ({
                     type="number"
                     placeholder="Min"
                     name="minPrice"
-                    value={min}
+                    defaultValue={min}
                     onChange={(e)=>setMin(e.target.value) }
                     className="w-full border border-gray-300 rounded-lg px-3 py-2"
                   />
@@ -59,35 +63,24 @@ const RoomFilters = ({
                     type="number"
                     placeholder="Max"
                     name="maxPrice"
-                    value={max}
+                    defaultValue={max}
                    onChange={(e)=>setMax(e.target.value) }
                     className="w-full border border-gray-300 rounded-lg px-3 py-2"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">Amenities</label>
-                <div className="space-y-2">
-                  {rooms &&  ([...new Set (rooms.map(items=>items.amenities))].flat().slice(0,6)).map((amenity,index )=> (
-                    <label key={index} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                       
-                        className="rounded text-[#f48c00]"
-                      />
-                      <span>{amenity}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+              
 
+           <div className='flex gap-4'>
+              
               <button
-                
+                     onClick={()=>dispatch(resetFilters())}
                 className="w-full bg-[#f48c00] text-white py-2 rounded-lg hover:bg-[#e07f00] transition-colors"
               >
-                Apply Filters
+                Clear Filter
               </button>
+           </div>
             </div>
           </div>
     );

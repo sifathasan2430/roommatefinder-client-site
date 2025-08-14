@@ -19,7 +19,7 @@ const FeaturedRoomsSection = ({featuredRooms}) => {
             >
               {/* Image */}
               <img
-                src={room.photos[0]}
+                src={'https://i.ibb.co/CsQJBkvL/small-juvenile-bedroom-arrangeme.jpg'}
                 alt={room.title}
                 className="h-48 w-full object-cover"
               />

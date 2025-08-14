@@ -4,7 +4,7 @@ import { FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 const RoomCard = ({ room, }) => {
   const navigate=useNavigate()
-  console.log(room)
+  
     return (
        
   <motion.div
