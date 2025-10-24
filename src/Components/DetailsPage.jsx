@@ -20,8 +20,8 @@ const dummyPosition = [33.7490, -84.3880]; // Latitude and Longitude for Atlanta
 // Dummy data for unique features
 const dummyVirtualTourPhotos = [
  "https://a0.muscache.com/im/pictures/miso/Hosting-973934339954558939/original/06040eaa-c34a-43f7-aeae-5606864a31ba.jpeg?im_w=960",
- 'https://a0.muscache.com/im/pictures/miso/Hosting-973934339954558939/original/055eada4-7e2b-478a-b591-8e81008c4d6c.jpeg?im_w=720',
- "https://a0.muscache.com/im/pictures/miso/Hosting-973934339954558939/original/05ca6492-16ce-43fd-944f-f7ca89a3316a.jpeg?im_w=720"
+ "https://a0.muscache.com/im/pictures/hosting/Hosting-1463577810671918613/original/9441347f-db3d-4dd5-bd9c-0f8fdf02111f.jpeg?im_w=960",
+ "https://a0.muscache.com/im/pictures/miso/Hosting-973934339954558939/original/055eada4-7e2b-478a-b591-8e81008c4d6c.jpeg?im_w=720"
 ];
 
 const dummyRoommateMatch = {
@@ -205,25 +205,24 @@ const RoomDetails = () => {
           </div>
         </div>
 
-        {/* Unique Feature 1: Virtual Tour */}
+        {/* Unique Feature 1: Virtual Tour (Airbnb-style Grid) */}
         <div className="px-6 sm:px-10 pb-10">
           <h3 className="text-2xl font-semibold text-gray-900 mb-3">Virtual Tour</h3>
-          <Swiper
-            modules={[Pagination, Navigation]}
-            pagination={{ clickable: true }}
-            navigation
-            className="w-full h-64"
-          >
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
             {dummyVirtualTourPhotos.map((url, idx) => (
-              <SwiperSlide key={idx}>
+              <div
+                key={idx}
+                className={`relative ${idx === 0 ? 'col-span-1 row-span-1' : 'col-span-1'} h-48 md:h-64 rounded-lg overflow-hidden shadow-sm`}
+              >
                 <img
                   src={url}
                   alt={`Virtual Tour ${idx + 1}`}
                   className="w-full h-full object-cover"
                 />
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+      
+          </div>
         </div>
 
         {/* Unique Feature 2: Roommate Matching Score */}
