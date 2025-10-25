@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import UserAuthContext from '../../Context/Context';
-import {Button} from '../Navbar/index'
+import {Button} from './index'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AuthUser, Token } from '../../features/auth/authSlice';

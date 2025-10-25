@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useDispatch, useSelector } from "react-redux";
 import getFilteredRooms from "../../customApi/customApi";
-import { Button, Input } from "../../Components/Navbar";
+import { Button, Input } from "../../components/Navbar";
 import { useState } from "react";
 import { setLocation as findLocation } from "../../features/filters/filterSlice";
 

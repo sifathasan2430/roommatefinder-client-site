@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Outlet, useNavigation } from 'react-router-dom';
-import Loader from '../Components/Loader';
-import Footer from '../Components/Footer/Footer';
+import Loader from '../components/Loader';
+import Footer from '../components/Footer/Footer';
 
-import Navbar from '../Components/Navbar/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 
 
 

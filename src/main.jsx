@@ -4,35 +4,36 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './layout/Root.jsx'
-import Errorpage from './Components/Errorpage.jsx'
-import SignUp from './Components/SignUp.jsx'
-import Login from './Components/Login.jsx'
+import Errorpage from './components/Errorpage.jsx'
+import SignUp from './components/SignUp.jsx'
+import Login from './components/Login.jsx'
 import AuthContextProvider from './Context/AuthContextProvider.jsx'
-import PrivateRoute from './Components/PrivateRoute.jsx'
+
 
 
 import Home from './layout/Home.jsx'
-import DetailsPage from './Components/DetailsPage.jsx'
-import Loader from './Components/Loader.jsx'
+import DetailsPage from './components/DetailsPage.jsx'
+import Loader from './components/Loader.jsx'
 
 
 import AllRooms from './Pages/AllRooms/AllRooms.jsx'
 import BookingForm from './Pages/Booking/BookingForm/BookingForm.jsx'
 import MyBookings from './Pages/MyBookings/MyBookings.jsx'
-import filter from '../Filter.jsx'
+
 import DashboardOverview from './layout/AdminLayout/Dashboard/DashboardOverview.jsx'
 
-import AddListingForm from './Components/AddListingForm/AddListingForm.jsx'
+import AddListingForm from './components/AddListingForm/AddListingForm.jsx'
 import AdminRoot from './layout/AdminLayout/AdminRoot/AdminRoot.jsx'
-import ListingsTable from './Components/Listtingtable/ListtingsTable.jsx'
-import UpdateListingForm from './Components/UpdateListingForm/UpdateListingForm.jsx'
+import ListingsTable from './components/Listtingtable/ListtingsTable.jsx'
+import UpdateListingForm from './components/UpdateListingForm/UpdateListingForm.jsx'
 import { Provider } from 'react-redux'
 
-import LoginForm from './Components/Login/LoginForm.jsx'
+import LoginForm from './components/Login/LoginForm.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { persistor, store } from './Store/Store.js'
 import { PersistGate } from 'redux-persist/integration/react'
-import Landing from './Components/Landing/Landing.jsx'
+import Landing from './components/Landing/Landing.jsx'
+import PrivateRoute from './components/Privateroute.jsx'
 const queryClient = new QueryClient()
 const router=createBrowserRouter([{
     path:"/",

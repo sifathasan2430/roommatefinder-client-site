@@ -1,7 +1,7 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent } from "../../../components/ui/card"
 import { Activity, ArrowUp, ArrowDown, Clock, DollarSign, Home } from "lucide-react"
-import Sidebar from "../../../Components/Sidebar/Sidebar"
-import ListingsTable from "../../../Components/Listtingtable/ListtingsTable"
+import Sidebar from "../../../components/Sidebar/Sidebar"
+import ListingsTable from "../../../components/Listtingtable/ListtingsTable"
 
 
 export default function DashboardOverview() {
